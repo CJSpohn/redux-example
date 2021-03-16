@@ -7,7 +7,6 @@ export const addIdea = idea => {
 
 export const deleteIdea = (ideaToDel, allIdeas) => {
   const filteredIdeas = allIdeas.filter(idea => idea !== ideaToDel)
-  console.log(filteredIdeas)
   return {
     type: 'REMOVE_IDEA',
     payload: filteredIdeas
