@@ -1,9 +1,11 @@
 const ideaReducer = (state = [], action) => {
   switch(action.type) {
     case 'ADD_IDEA':
-      return [...state, action]
+      return [...state, action.message]
     case 'REMOVE_IDEA':
-      return [...state.filter(idea => idea.id !== action.id)]
+      return state.filter(idea => idea.message !== action.message)
+    default:
+      return state;
   }
 }
 
