@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addIdea } from '../actions'
+import { addIdea, deleteIdea } from '../actions'
 
 import './App.css';
 
@@ -10,8 +10,14 @@ const App = () => {
   const [idea, setIdea] = useState('');
 
   const submitIdea = () => {
-    dispatch(addIdea(idea))
-    setIdea('')
+    if (idea) {
+      dispatch(addIdea(idea))
+      setIdea('')
+    }
+  }
+
+  const removeIdea = (ideaToDel) => {
+    dispatch(deleteIdea(ideaToDel, allIdeas))
   }
 
   return (
@@ -27,7 +33,12 @@ const App = () => {
           />
       </form>
       <button onClick={submitIdea} className="submit-idea">Submit Idea</button>
-      {allIdeas.length !== 0 && allIdeas.map((idea, index) => <p key={index}>{idea}</p>)}
+      {allIdeas.length !== 0 && allIdeas.map((idea, index) => (
+        <div key={index}>
+          <p>{idea}</p>
+          <button onClick={() => removeIdea(idea)} key={index}>del</button>
+        </div>
+      ))}
     </section>
   );
 }
